@@ -1,0 +1,5 @@
+reformador,123456,reformador@gmail.com
+Pablo Cerda,123456,pcerda@inacap.cl
+Christian Perez,123456,chperez@inacap.cl
+Fernando Galaz,123456,fgalaz@inacap.cl
+jperez1,123456789,jperez1@inacap.cl
