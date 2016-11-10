@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Autor;
+import Modelo.Autores;
 import Modelo.Usuarios;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class CRUD_Autores {
     //arraylist
-    ArrayList<Autor> datos=new ArrayList<>();
+    ArrayList<Autores> datos=new ArrayList<>();
     
     //read
-        public ArrayList<Autor> read() {
+        public ArrayList<Autores> read() {
         leer();
         return datos;
         }    
@@ -26,10 +26,10 @@ public class CRUD_Autores {
             br = new BufferedReader(fr);
             String linea = null;
             String[] array = null;
-            Autor autor = null;
+            Autores autor = null;
             while ((linea = br.readLine()) != null) {
                 array = linea.split(",");
-                autor = new Autor();
+                autor = new Autores();
                 autor.setAut_cod(Integer.parseInt(array[0]));
                 autor.setAut_nom(array[1]);
                 autor.setAut_f_nac(array[2]);

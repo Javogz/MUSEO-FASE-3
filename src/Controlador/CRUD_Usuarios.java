@@ -10,26 +10,31 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class CRUD_Usuarios {
+
     //ArrayList
     ArrayList<Usuarios> datos = new ArrayList<>();
+
     //Constructores
     public CRUD_Usuarios() {
         leer();
     }
+
     //Create
     public void create(String nombre, String password,
             String email) {
         datos.add(new Usuarios(nombre, password, email));
         grabar();
     }
+
     //Read
     public ArrayList<Usuarios> read() {
         leer();
         return datos;
     }
+
     //Update
-     public void update(Usuarios u, String email) {
-         leer();
+    public void update(Usuarios u, String email) {
+        leer();
         for (Usuarios u1 : datos) {
             if (u1.getEmailUsuario().equals(email)) {
                 datos.set(datos.indexOf(u1), u);
@@ -38,9 +43,10 @@ public class CRUD_Usuarios {
             }
         }
     }
+
     //Delete
-      public void delete(Usuarios u) {
-          leer();
+    public void delete(Usuarios u) {
+        leer();
         for (Usuarios u1 : datos) {
             if (u1.getEmailUsuario().equals(u.getEmailUsuario())) {
                 datos.remove(datos.indexOf(u1));
@@ -48,11 +54,23 @@ public class CRUD_Usuarios {
                 break;
             }
         }
-        
+
     }
+
+    public Usuarios verificar_usuario(String email, String password) {
+        leer();
+        for (Usuarios u : datos) {
+            if (u.getEmailUsuario().equals(email)
+                    && u.getPasswordUsuario().equals(password)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
     //Search
-       public Usuarios search(String buscar) {
-           leer();
+    public Usuarios search(String buscar) {
+        leer();
         for (Usuarios u : datos) {
             if (u.getNombreUsuario().equals(buscar)) {
                 return u;
@@ -60,17 +78,19 @@ public class CRUD_Usuarios {
         }
         return null;
     }
+
     //Verificar Usuario
-        public boolean verificar(Usuarios u){
-            
-            for (Usuarios u1:datos) {
-              if(u1.getNombreUsuario().equals(u.getNombreUsuario())
-                 && u1.getPasswordUsuario().equals(u.getPasswordUsuario())){
-                    return true;
-              }
+    public boolean verificar(Usuarios u) {
+
+        for (Usuarios u1 : datos) {
+            if (u1.getNombreUsuario().equals(u.getNombreUsuario())
+                    && u1.getPasswordUsuario().equals(u.getPasswordUsuario())) {
+                return true;
             }
-            return false;
         }
+        return false;
+    }
+
     /**
      * ****Archivos de Texto****
      */
@@ -105,6 +125,7 @@ public class CRUD_Usuarios {
         }
 
     }
+
     //Grabar
     private void grabar() {
         FileWriter fr = null;
@@ -114,7 +135,7 @@ public class CRUD_Usuarios {
             pw = new PrintWriter(fr);
             for (Usuarios u : datos) {
                 pw.println(u.getNombreUsuario() + ","
-                        + u.getPasswordUsuario()+","
+                        + u.getPasswordUsuario() + ","
                         + u.getEmailUsuario());
             }
         } catch (Exception ex) {

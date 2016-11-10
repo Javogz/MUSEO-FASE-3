@@ -2,8 +2,10 @@ package Vista;
 
 import Controlador.CRUD_Autores;
 import Controlador.CRUD_Galerias;
-import Modelo.Autor;
+import Controlador.CRUD_Obras;
+import Modelo.Autores;
 import Modelo.Galerias;
+import Modelo.Obras_de_Arte;
 import Modelo.Usuarios;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -22,13 +24,12 @@ public class frmVisor extends javax.swing.JInternalFrame {
                 //cargar datos de autores
                 ArrayList<Galerias> datosg = crudg.read();
                 //Objeto de tipo tabla
-                DefaultTableModel tabla = new DefaultTableModel();
                 tabla.setColumnCount(0);
                 tabla.addColumn("Nombre");
-                tabla.addColumn("ubicación");
+                tabla.addColumn("Ubicación");
                 //Definir cantidad de filas
                 tabla.setNumRows(datosg.size());
-                //Crear instancia de clase Autor
+                //Crear instancia de clase Autores
                 Galerias galeria = new Galerias();
                 //Agregar datos a la tabla
                 for (int i = 0; i < datosg.size(); i++) {
@@ -40,11 +41,34 @@ public class frmVisor extends javax.swing.JInternalFrame {
                 jTable1.setModel(tabla);
                 break;
             case "Obras de Arte":
+                CRUD_Obras crudo = new CRUD_Obras();
+                //cargar datos de autores
+                ArrayList<Obras_de_Arte> datoso = crudo.read();
+                //Objeto de tipo tabla
+                tabla.setColumnCount(0);
+                tabla.addColumn("Código");
+                tabla.addColumn("Título");
+                tabla.addColumn("Fecha de creación");
+                tabla.addColumn("Fecha de ingreso");
+                //Definir cantidad de filas
+                tabla.setNumRows(datoso.size());
+                //Crear instancia de clase Autores
+                Obras_de_Arte obras = new Obras_de_Arte();
+                //Agregar datos a la tabla
+                for (int i = 0; i < datoso.size(); i++) {
+                    //Casting de datos
+                    obras = (Obras_de_Arte) datoso.get(i);
+                    tabla.setValueAt(obras.getObras_cod(), i, 0);
+                    tabla.setValueAt(obras.getObras_tit(), i, 1);
+                    tabla.setValueAt(obras.getObras_f_crea(), i, 2);
+                    tabla.setValueAt(obras.getObras_f_ing(), i, 3);
+                }
+                jTable1.setModel(tabla);
                 break;
             case "Autores":
                 CRUD_Autores cruda = new CRUD_Autores();
                 //cargar datos de autores
-                ArrayList<Autor> datosa = cruda.read();
+                ArrayList<Autores> datosa = cruda.read();
                 tabla.setColumnCount(0);
                 tabla.addColumn("Código");
                 tabla.addColumn("Nombre");
@@ -52,12 +76,12 @@ public class frmVisor extends javax.swing.JInternalFrame {
                 tabla.addColumn("Fecha Defunción");
                 //Definir cantidad de filas
                 tabla.setNumRows(datosa.size());
-                //Crear instancia de clase Autor
-                Autor autor = new Autor();
+                //Crear instancia de clase Autores
+                Autores autor = new Autores();
                 //Agregar datos a la tabla
                 for (int i = 0; i < datosa.size(); i++) {
                     //Casting de datos
-                    autor = (Autor) datosa.get(i);
+                    autor = (Autores) datosa.get(i);
                     tabla.setValueAt(autor.getAut_cod(), i, 0);
                     tabla.setValueAt(autor.getAut_nom(), i, 1);
                     tabla.setValueAt(autor.getAut_f_nac(), i, 2);
@@ -94,8 +118,6 @@ public class frmVisor extends javax.swing.JInternalFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jToolBar1.setRollover(true);
-
-        jTextField1.setText("jTextField1");
         jToolBar1.add(jTextField1);
 
         jPanel1.add(jToolBar1, java.awt.BorderLayout.PAGE_START);

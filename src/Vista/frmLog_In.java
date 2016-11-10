@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Vista;
 
+import Controlador.CRUD_Administrador;
 import Controlador.CRUD_Usuarios;
+import Modelo.Administrador;
 import Modelo.Usuarios;
 import javax.swing.JOptionPane;
 
@@ -58,6 +59,11 @@ public class frmLog_In extends javax.swing.JInternalFrame {
         mensaje.setForeground(new java.awt.Color(255, 0, 0));
 
         jCheckBox1.setText("Admin");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,21 +119,50 @@ public class frmLog_In extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CRUD_Usuarios crud=new CRUD_Usuarios();
-        Usuarios u=new Usuarios(usuario.getText(), 
+        CRUD_Usuarios crud = new CRUD_Usuarios();
+        Usuarios u = crud.verificar_usuario(usuario.getText(),
                 String.copyValueOf(password.getPassword()));
-        if(crud.verificar(u)){
-            frmPrincipal.jLabel1.setText("Hola: "+u.getNombreUsuario());
-            //DashBoard user
-            frmDashBoard frm=new frmDashBoard();
-            frmPrincipal.jDesktopPane1.add(frm);
-            frm.show();
-            this.dispose();
-        }else{
+        if (u == null) {
             mensaje.setText("Usuario o Password Incorrecto");
+        } else {
+            //Verificar si ha marcado la opcion de Administrador
+            if (jCheckBox1.isSelected() == false) {
+                //Abrir Dashboard de Usuario
+                frmDashBoard frm = new frmDashBoard();
+                frmPrincipal.jDesktopPane1.add(frm);
+                frm.show();
+                try {
+                    frm.setMaximum(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                CRUD_Administrador admin = new CRUD_Administrador();
+                Administrador a = admin.verificar_usuario(Integer.parseInt(JOptionPane.showInputDialog("Clave Administrador")));
+                if (a != null) {
+                    //Abrir Dashboard de Administrador
+                    frmAdmnistrador frm = new frmAdmnistrador();
+                    frmPrincipal.jDesktopPane1.add(frm);
+                    frm.show();
+                    try {
+                        frm.setMaximum(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mensaje.setText("<html>Error, Clave de Administrador Incorrecta<br>"
+                            + "Intentalo nuevamente</html>");
+                    return;
+                }
+            }
+
+            this.dispose();
         }
-            
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

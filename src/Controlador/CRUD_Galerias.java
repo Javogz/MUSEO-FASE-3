@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Autor;
+import Modelo.Autores;
 import Modelo.Galerias;
 import java.io.BufferedReader;
 import java.io.FileReader;

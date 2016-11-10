@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Autor extends Nacionalidad{
+public class Autores extends Nacionalidades{
     private int aut_cod;
     private String aut_nom;
     private String aut_f_nac;
@@ -8,10 +8,10 @@ public class Autor extends Nacionalidad{
     
     //Constructores
 
-    public Autor() {
+    public Autores() {
     }
 
-    public Autor(int aut_cod, String aut_nom, String aut_f_nac, String aut_f_def) {
+    public Autores(int aut_cod, String aut_nom, String aut_f_nac, String aut_f_def) {
         this.aut_cod = aut_cod;
         this.aut_nom = aut_nom;
         this.aut_f_nac = aut_f_nac;
