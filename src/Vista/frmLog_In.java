@@ -120,11 +120,16 @@ public class frmLog_In extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CRUD_Usuarios crud = new CRUD_Usuarios();
-        Usuarios u = crud.verificar_usuario(usuario.getText(),
+        //AQUI AHORA ES sTRING EN VEZ DE USUARIOS
+        String u = crud.verificar_usuario(usuario.getText(),
                 String.copyValueOf(password.getPassword()));
-        if (u == null) {
+        //LA U ES IGUAL A NADA, NO NULL
+        if (u =="") {
             mensaje.setText("Usuario o Password Incorrecto");
         } else {
+            //CAMBIA EL JLABEL1
+            frmPrincipal.jLabel1.setText(""+u);
+            //aqui va el jlabel2, no lo tengo XD
             //Verificar si ha marcado la opcion de Administrador
             if (jCheckBox1.isSelected() == false) {
                 //Abrir Dashboard de Usuario

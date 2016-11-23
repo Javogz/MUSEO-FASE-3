@@ -7,9 +7,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CRUD_Usuarios {
+
+    //Instanciar clase conexion
+    Control_Conexion con = new Control_Conexion();
 
     //ArrayList
     ArrayList<Usuarios> datos = new ArrayList<>();
@@ -56,16 +64,29 @@ public class CRUD_Usuarios {
         }
 
     }
+    //ESTO ANTES ERA USUSARIOS VERIFICAR_USUARIO... CON LEER DENTRO
 
-    public Usuarios verificar_usuario(String email, String password) {
-        leer();
-        for (Usuarios u : datos) {
-            if (u.getEmailUsuario().equals(email)
-                    && u.getPasswordUsuario().equals(password)) {
-                return u;
+    public String verificar_usuario(String email, String password) {
+        //establecer comunicaion con el servidor
+        con.conectar();
+        try {
+            //crear consulta sql
+            //LOS usu_ corresponden a los nombre de las columnas en sql de Usuarios
+            PreparedStatement sql = con.estado().prepareStatement(""
+                    + "SELECT usu_nom FROM Usuarios WHERE usu_email='" + email
+                    + "' AND usu_pass='" + password + "'");
+            //contenedor de consulta sql
+            ResultSet res = sql.executeQuery();
+            if (res.next()) {
+                return res.getString("usu_nom");
             }
+            //cerrar conexion
+            con.cerrar();
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return "";
+        //despues de esto el frmLogin queda rojo el boton iniciar sesion
     }
 
     //Search

@@ -16,8 +16,8 @@ public class Control_Conexion {
     Connection con=null;
 
     public Control_Conexion() {
-        this.usuario="root";
-        this.password="";
+        this.usuario="adminjavo101";
+        this.password="golazo123";
         this.url="jdbc:mysql://127.0.0.1/museojavo101";
     } 
     
