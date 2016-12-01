@@ -8,6 +8,10 @@ public class TiposObra {
     public TiposObra() {
     }
 
+    public TiposObra(String tipo_desc) {
+        this.tipo_desc = tipo_desc;
+    }
+
     public TiposObra(int tipo_cod, String tipo_desc) {
         this.tipo_cod = tipo_cod;
         this.tipo_desc = tipo_desc;
@@ -28,6 +32,11 @@ public class TiposObra {
     public void setTipo_desc(String tipo_desc) {
         this.tipo_desc = tipo_desc;
     }
-    
-    
+
+    //sobreescritura
+    @Override
+    public String toString() {
+        return tipo_desc;
+    }
+
 }

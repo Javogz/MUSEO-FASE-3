@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.ObrasArtejavo;
 import Modelo.TiposObra;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class CRUD_TiposObra {
             datos.clear();
             con.conectar();
             PreparedStatement sql = con.estado().prepareStatement(""
-                    + "SELECT * FROM TiposObra WHERE tipo_desc LIKE '%" + buscar + "%'");
+                    + "SELECT * FROM TiposObra WHERE tipo_desc LIKE '%" + buscar + "%' ORDER BY tipo_desc");
             ResultSet res = sql.executeQuery();
             while (res.next()) {
                 datos.add(new TiposObra(res.getInt("tipo_cod"), res.getString("tipo_desc")));

@@ -11,6 +11,11 @@ public class Autores extends Nacionalidades{
     public Autores() {
     }
 
+    public Autores(int aut_cod, String aut_nom) {
+        this.aut_cod = aut_cod;
+        this.aut_nom = aut_nom;
+    }
+
     public Autores(int aut_cod, String aut_nom, String aut_f_nac, String aut_f_def) {
         this.aut_cod = aut_cod;
         this.aut_nom = aut_nom;
@@ -51,6 +56,9 @@ public class Autores extends Nacionalidades{
     public void setAut_f_def(String aut_f_def) {
         this.aut_f_def = aut_f_def;
     }
-    
+    @Override
+    public String toString(){
+        return aut_nom;
+    }
     
 }
